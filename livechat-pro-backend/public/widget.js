@@ -139,6 +139,7 @@
       // Update toggle button color dynamically
       const brandColor = sessionData.workspace?.branding?.primaryColor || sessionData.workspace?.widget?.primaryColor || brand;
       btn.style.background = brandColor;
+      btn.style.color = "white"; // Ensure white text
 
       renderChat(sessionData);
       isOpen = true;
@@ -184,11 +185,13 @@
     // HEADER
     const header = document.createElement("div");
     header.className = "lc-header";
-    header.style.background = brand;
+    header.style.background = brandColor;
+    header.style.color = "white";
+    header.style.textShadow = "0 1px 2px rgba(0,0,0,0.1)";
     header.innerHTML = `
       <div>
         <div style="font-weight:600">${workspace.name || "Support"}</div>
-        <div style="font-size:12px;opacity:0.8">Usually replies in under 2 min</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.95)">Usually replies in under 2 min</div>
       </div>
       <div id="lc-close" style="cursor:pointer;font-size:18px">×</div>
     `;

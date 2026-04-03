@@ -5,7 +5,7 @@ A powerful, real-time customer support platform designed for modern web applicat
 ## ✨ Features
 
 - **Real-time Messaging**: Powered by Socket.io for instantaneous communication between agents and visitors.
-- **Customizable Widget**: Change colors, greetings, and behavior directly from the dashboard.
+- **Customizable Widget**: Change colors, greetings, and behavior directly from the dashboard. The "Chat with us" button and widget theme update dynamically to match your workspace branding.
 - **Unified Inbox**: Manage all your customer conversations in one place with a triage-first interface.
 - **Visitor Tracking**: See who's on your site in real-time.
 - **Snippet Integration**: Easilly install the chat widget on any website with a single line of code.
