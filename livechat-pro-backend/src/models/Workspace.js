@@ -76,7 +76,8 @@ const brandingSchema = new mongoose.Schema(
   {
     companyName: { type: String, default: "LiveChat Pro" },
     supportEmail: { type: String, default: "help@livechatpro.demo" },
-    website: { type: String, default: "https://livechatpro.demo" }
+    website: { type: String, default: "https://livechatpro.demo" },
+    primaryColor: { type: String, default: "#5B6CFF" }
   },
   { _id: false }
 );

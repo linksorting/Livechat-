@@ -195,7 +195,8 @@
 
     messages.forEach(function (m) {
       const side = m.senderType === "visitor" || m.senderType === "customer" ? "lc-right" : "lc-left";
-      msgs.innerHTML += `<div class="lc-bubble ${side}">${m.content}</div>`;
+      const style = side === "lc-right" ? `style="background:${brandColor}"` : "";
+      msgs.innerHTML += `<div class="lc-bubble ${side}" ${style}>${m.content}</div>`;
     });
 
     // INPUT
@@ -220,8 +221,14 @@
     // VARIABLES
     const input = inputWrap.querySelector("input");
     const sendBtn = inputWrap.querySelector("button");
+    const brandColor = workspace.branding?.primaryColor || workspace.widget?.primaryColor || brand;
+    
+    // Apply dynamic brand color
+    header.style.background = brandColor;
+    sendBtn.style.background = brandColor;
 
     // POLLING FOR NEW MESSAGES
+    const processedIds = new Set(messages.map(m => m._id));
     let lastMessageCount = messages.length;
     const pollInterval = setInterval(async () => {
       if (!isOpen) {
@@ -234,25 +241,22 @@
         if (!res.ok) return;
 
         const json = await res.json();
-        const newMessages = json.messages || []; // Use json.messages directly
+        const newMessages = json.messages || [];
 
-        if (newMessages.length > lastMessageCount) {
-          for (let i = lastMessageCount; i < newMessages.length; i++) {
-            const m = newMessages[i];
+        newMessages.forEach(m => {
+          if (!processedIds.has(m._id)) {
+            processedIds.add(m._id);
             const side = m.senderType === "visitor" || m.senderType === "customer" ? "lc-right" : "lc-left";
+            const msgEl = document.createElement("div");
+            msgEl.className = `lc-bubble ${side}`;
+            if (side === "lc-right") msgEl.style.background = brandColor;
+            msgEl.innerText = m.content;
+            msgs.appendChild(msgEl);
             
-            // Check if already in UI
-            const exists = Array.from(msgs.children).some(el => el.innerText === m.content);
-            if (!exists) {
-              const msgEl = document.createElement("div");
-              msgEl.className = `lc-bubble ${side}`;
-              msgEl.innerText = m.content;
-              msgs.appendChild(msgEl);
-            }
+            lastMessageCount++;
+            msgs.scrollTop = msgs.scrollHeight;
           }
-          lastMessageCount = newMessages.length;
-          msgs.scrollTop = msgs.scrollHeight;
-        }
+        });
       } catch (err) {
         console.error("[LiveChatPro] Poll failed:", err);
       }
@@ -265,6 +269,7 @@
 
       const msg = document.createElement("div");
       msg.className = "lc-bubble lc-right";
+      msg.style.background = brandColor;
       msg.innerText = text;
       msgs.appendChild(msg);
       input.value = "";
