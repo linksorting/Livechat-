@@ -134,7 +134,12 @@
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
       const json = await res.json();
-      sessionData = json; // The stable endpoint returns data directly
+      sessionData = json;
+      
+      // Update toggle button color dynamically
+      const brandColor = sessionData.workspace?.branding?.primaryColor || sessionData.workspace?.widget?.primaryColor || brand;
+      btn.style.background = brandColor;
+
       renderChat(sessionData);
       isOpen = true;
     } catch (err) {
