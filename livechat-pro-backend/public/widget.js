@@ -1,5 +1,5 @@
 (function () {
-  const config = window.LiveChatPro || {};
+  const config = window.Chatlee || window.LiveChatPro || {};
   const brand = config.brandColor || "#6366f1";
   const apiUrl = config.apiUrl || window.location.origin;
 
@@ -128,7 +128,10 @@
       const res = await fetch(`${apiUrl}/api/v1/widget/session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workspaceSlug: config.workspace })
+        body: JSON.stringify({
+          workspaceSlug: config.workspace,
+          visitorToken: localStorage.getItem("lcp_vtoken")
+        })
       });
 
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
@@ -144,7 +147,7 @@
       renderChat(sessionData);
       isOpen = true;
     } catch (err) {
-      console.error("[LiveChatPro] Failed to open chat:", err);
+      console.error("[Chatlee] Failed to open chat:", err);
       renderError(err.message);
       isOpen = true;
     }
@@ -156,7 +159,7 @@
     box.className = "lc-box";
     box.innerHTML = `
       <div class="lc-header" style="background:${brand}">
-        <div style="font-weight:600">LiveChat Pro</div>
+        <div style="font-weight:600">Chatlee</div>
         <div id="lc-close" style="cursor:pointer;font-size:18px">×</div>
       </div>
       <div class="lc-error">
@@ -185,7 +188,7 @@
     // HEADER
     const header = document.createElement("div");
     header.className = "lc-header";
-    header.style.background = brandColor;
+    header.style.background = brand;
     header.style.color = "white";
     header.style.textShadow = "0 1px 2px rgba(0,0,0,0.1)";
     header.innerHTML = `
@@ -203,7 +206,7 @@
 
     messages.forEach(function (m) {
       const side = m.senderType === "visitor" || m.senderType === "customer" ? "lc-right" : "lc-left";
-      const style = side === "lc-right" ? `style="background:${brandColor}"` : "";
+      const style = side === "lc-right" ? `style="background:${brand}"` : "";
       msgs.innerHTML += `<div class="lc-bubble ${side}" ${style}>${m.content}</div>`;
     });
 
@@ -266,7 +269,7 @@
           }
         });
       } catch (err) {
-        console.error("[LiveChatPro] Poll failed:", err);
+        console.error("[Chatlee] Setup failed:", err);
       }
     }, 3000);
 

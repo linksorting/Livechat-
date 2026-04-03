@@ -115,7 +115,7 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use((config) => {
-  const token = localStorage.getItem("livechatpro_token");
+  const token = localStorage.getItem("chatlee_token");
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -205,9 +205,9 @@ export function buildAttachmentUrl(url = "") {
   return `${SOCKET_URL}${url}`;
 }
 
-export function generateEmbedSnippet(slug = "livechat-pro-demo") {
+export function generateEmbedSnippet(slug = "chatlee-demo") {
   return `<script>
-  window.LiveChatPro = {
+  window.Chatlee = {
     workspace: "${slug}",
     apiUrl: "${SOCKET_URL}"
   };

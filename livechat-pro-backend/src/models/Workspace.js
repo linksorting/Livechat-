@@ -74,7 +74,7 @@ const routingSchema = new mongoose.Schema(
 
 const brandingSchema = new mongoose.Schema(
   {
-    companyName: { type: String, default: "LiveChat Pro" },
+    companyName: { type: String, default: "Chatlee" },
     supportEmail: { type: String, default: "help@livechatpro.demo" },
     website: { type: String, default: "https://livechatpro.demo" },
     primaryColor: { type: String, default: "#5B6CFF" }

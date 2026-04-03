@@ -1,6 +1,6 @@
-# LiveChat Pro 🚀
+# Chatlee 🚀
 
-A powerful, real-time customer support platform designed for modern web applications. LiveChat Pro allows you to engage with your visitors instantly, manage conversations efficiently, and customize your support experience.
+A powerful, real-time customer support platform designed for modern web applications. Chatlee allows you to engage with your visitors instantly, manage conversations efficiently, and customize your support experience.
 
 ## ✨ Features
 
@@ -37,13 +37,13 @@ A powerful, real-time customer support platform designed for modern web applicat
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/linksorting/Livechat-.git
-   cd Livechat-
+   git clone https://github.com/linksorting/Chatlee-.git
+   cd Chatlee-
    ```
 
 2. **Setup Backend**:
    ```bash
-   cd livechat-pro-backend
+   cd Chatlee-pro-backend
    npm install
    # Create a .env file based on .env.example
    npm run dev
@@ -51,7 +51,7 @@ A powerful, real-time customer support platform designed for modern web applicat
 
 3. **Setup Frontend**:
    ```bash
-   cd ../livechat-pro-frontend
+   cd ../Chatlee-pro-frontend
    npm install
    # Create a .env file if needed
    npm run dev
@@ -59,11 +59,11 @@ A powerful, real-time customer support platform designed for modern web applicat
 
 ## 📦 Widget Integration
 
-To add LiveChat Pro to your website, paste the following snippet before the closing `</body>` tag:
+To add Chatlee to your website, paste the following snippet before the closing `</body>` tag:
 
 ```html
 <script>
-  window.LiveChatPro = {
+  window.ChatleePro = {
     workspace: "your-workspace-slug",
     apiUrl: "http://localhost:5000" // Replace with your production API URL
   };

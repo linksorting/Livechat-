@@ -90,11 +90,11 @@ const AuthContext = createContext(null);
 const SocketContext = createContext(null);
 
 function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem("livechatpro_theme") || "dark");
+  const [theme, setTheme] = useState(() => localStorage.getItem("chatlee_theme") || "dark");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("livechatpro_theme", theme);
+    localStorage.setItem("chatlee_theme", theme);
   }, [theme]);
 
   return (
@@ -150,7 +150,7 @@ function AuthProvider({ children }) {
   async function register(payload) {
     const response = await http.post("/auth/register", payload);
     const nextToken = response.data.data.token;
-    localStorage.setItem("livechatpro_token", nextToken);
+    localStorage.setItem("chatlee_token", nextToken);
     setToken(nextToken);
     await refreshMe(nextToken);
   }
@@ -158,8 +158,8 @@ function AuthProvider({ children }) {
   function logout() {
     setToken(null);
     setUser(null);
-    localStorage.removeItem("livechatpro_token");
-    localStorage.removeItem("livechatpro_user");
+    localStorage.removeItem("chatlee_token");
+    localStorage.removeItem("chatlee_user");
   }
 
   return (
@@ -403,7 +403,7 @@ function Sidebar({ mobile = false, onNavigate }) {
           <Shield size={22} />
         </div>
         <div>
-          <div className="font-semibold">LiveChat Pro</div>
+          <div className="font-semibold">Chatlee</div>
           <div className="text-xs text-slate-500 dark:text-slate-400">Support command center</div>
         </div>
       </div>
@@ -708,7 +708,7 @@ function LoginPage() {
           <div className="mb-8 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-brand-600 text-white shadow-soft"><Shield size={24} /></div>
             <div>
-              <div className="text-xl font-semibold">Sign in to LiveChat Pro</div>
+              <div className="text-xl font-semibold">Sign in to Chatlee</div>
               <div className="text-sm text-slate-500 dark:text-slate-400">Use the seeded demo account or your own workspace credentials.</div>
             </div>
           </div>
